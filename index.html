@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Directed Graph Editor</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+
+  <body>
+    <center><h1>Data compression visualization</h1></center>
+    <div id="row1">
+      <div id="graph-viz"></div>
+      <div id ="matrix">
+          <h3>Incidence Matrix</h3><h5>(edges vs vertices)</h5>
+          <div id="myTable"></div>
+      </div>
+    </div>
+    <div id='row2'>
+      <button onclick="slCompress()">I-Compression</button>
+      <div id='compressres'></div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="http://d3js.org/d3.v5.min.js"></script>
+  <script src="app.js"></script>
+</html>
