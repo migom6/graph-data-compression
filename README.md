@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# graph-data-compression
-=======
 # Visualisation of different graph compression techniques  
 ## See live preview  https://migom6.github.io/graph-data-compression/
 
