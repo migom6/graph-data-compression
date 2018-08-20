@@ -2,8 +2,8 @@
 
 
 
-const width = 200;
-const height = 100;
+const width = 500;
+const height = 400;
 const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
 
