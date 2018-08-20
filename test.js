@@ -4,6 +4,7 @@ var M = [[0, 0, 0, 0, 0],
 [0, 0, 1, 1, 1],
 [1, 0, 1, 1, 1],
 [0, 1, 0, 0, 0]];
+
 function zeros(dimensions) {
   var array = []
   for (var i = 0; i < dimensions[0]; ++i) {
@@ -29,7 +30,6 @@ function inc_adj(M) {
   return adj
 }
 
-console.log(inc_adj(M))
 
 function runlength(M) {
   var EM = [];
@@ -46,10 +46,52 @@ function runlength(M) {
     }
     EM.push(EMrow);
   }
-  return [EM, 1 - (EM_size / M_size)];
+  return [EM,  M_size/EM_size];
 }
 
-function sai(M) {
+function binary2decimal(m){
+	var i,j,sum=0,count=0,b=new Array(),li=new Array();
+    var size = 0;
+    x = m.length;
+    y = m[0].length;
+    console.log(y);
+	for(i=0 ; i<x;i++){
+    	var count= 0,sum =0;
+        
+	  for( j=0 ; j<=y; j++){
+      		if(count>63 || j==y){
+				li.push(sum);
+  				size ++;
+                //document.write(sum+ " "+j+"<br>");
+					count=0,sum=0;
+			}
+			if(count<=63){
+				sum = sum + (Math.pow(2,count) * m[i][j]);
+                
+                if(count==y-1)
+                {
+                    li.push(sum);
+                    size ++;
+                    break;
+                }
+                //sum = (sum<< 1)| (m[i][j]);
+				count++;
+			}
+
+		}
+		b.push(li),sum=0,count=0,li=[];
+        //size++;
+	}
+    //document.write(size+" <br>");
+    size = b[0].length*b.length;
+    size = (x*y)/size;
+   // document.write(size);
+    return [b, size];
+}
+
+
+
+function inc_list(M) {
   vertices = M.length
   edges = M[0].length
   res = []
@@ -61,9 +103,16 @@ function sai(M) {
     }
     res.push(row)
   }
-  compressed = (1 - (2 / vertices))
-  return ([res, compressed]);
-
+  return ([res, vertices/2]);
 }
 
-// console.log(sai(M))
+
+
+
+
+console.log(inc_adj(M));
+console.log(runlength(M));
+console.log(inc_list(M));
+console.log(binary2decimal(M));
+
+
