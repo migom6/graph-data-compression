@@ -1,12 +1,9 @@
 // set up SVG for D3
 
-const height = document.getElementById('graph-viz').clientHeight;
 
-const width = document.getElementById('graph-viz').clientWidth;
 
-console.log(height, width)
-// const width = 960;
-// const height = 500;
+const width = 960;
+const height = 500;
 const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
 
@@ -20,26 +17,18 @@ const svg = d3.select('#graph-viz')
 //  - nodes are known by 'id', not by index in array.
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
-// const nodes = [
-//   { id: 0, reflexive: false },
-//   { id: 1, reflexive: true },
-//   { id: 2, reflexive: false },
-//   { id: 3, reflexive: false },
-//   { id: 4, reflexive: true },
-//   { id: 5, reflexive: false }
-// ];
+const nodes = [
+  { id: 0, reflexive: false },
+  { id: 1, reflexive: true },
+ 
+];
 
 
-let lastNodeId = 0;
-// const links = [
-//   { source: nodes[0], target: nodes[1], left: false, right: false },
-//   { source: nodes[1], target: nodes[2], left: false, right: false },
-//   { source: nodes[2], target: nodes[5], left: false, right: false },
-//   { source: nodes[0], target: nodes[3], left: false, right: false },
-//   { source: nodes[2], target: nodes[4], left: false, right: false },
-//   { source: nodes[1], target: nodes[4], left: false, right: false },
+let lastNodeId = 2;
+const links = [
+  { source: nodes[0], target: nodes[1], left: false, right: false },
 
-// ];
+];
 
 // init D3 force layout
 const force = d3.forceSimulation()
@@ -289,11 +278,63 @@ function mousemove() {
   restart();
 }
 
+function createMatrix(nodes, links){
+  if(nodes.length == 0 || links.length ==0)
+    return("cant create")
+  M = []
+  for(i = 0; i < nodes.length; i++){
+    row = []
+    for(j = 0; j < links.length; j++){
+      row.push(0)
+    }
+    M.push(row)
+  }
+  for(i =0; i < links.length; i++){
+    x = links[i].source.id
+    y = links[i].target.id
+    M[x][i] = 1
+    M[y][i] = 1
+  }
+  return M
+}
 
+function sl(M) {
+  vertices = M.length
+  edges = M[0].length
+  res = []
+  for(i = 0; i < edges; i++){
+    row = []
+    for(j = 0; j < vertices; j++){
+      if (M[j][i]==1)
+      row.push(j);
+    }
+    res.push(row)
+  }
+  compressed = (1-(2/vertices))
+  return([res, compressed]);
+  
+}
 
+function makeTableHTML(myArray) {
+  var result = "<table>";
+  for(var i=0; i<myArray.length; i++) {
+      result += "<tr>";
+      for(var j=0; j<myArray[i].length; j++){
+          result += "<td>"+myArray[i][j]+"</td>";
+      }
+      result += "</tr>";
+  }
+  result += "</table>";
 
+  return result;
+}
 
+function myTable() {
+  M = createMatrix(nodes, links)
 
+  res = makeTableHTML(M)
+  document.getElementById('myTable').innerHTML = res
+}
 
 function mouseup() {
   if (mousedownNode) {
@@ -406,5 +447,9 @@ d3.select(window)
 restart();
 
 
-
+function slCompress() {
+  M = createMatrix(nodes, links)
+  resp = sl(M)
+  document.getElementById('compressres').innerHTML =   resp.toString()
+}
 
