@@ -24,7 +24,7 @@ const nodes = [
 ];
 
 
-let lastNodeId = 2;
+let lastNodeId = 1;
 const links = [
   { source: nodes[0], target: nodes[1], left: false, right: false },
 
