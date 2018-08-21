@@ -330,7 +330,7 @@ function sl(M) {
     }
     res.push(row)
   }
-  compressed = (1-(2/vertices))
+  compressed = (1-(2/vertices)).toFixed(2)
   return([res, compressed]);
   
 }
@@ -470,6 +470,88 @@ restart();
 function slCompress() {
   M = createMatrix(nodes, links)
   resp = sl(M)
-  document.getElementById('compressres').innerHTML =   resp.toString()
+  console.log('hi')
+  document.getElementById('compressres').innerHTML =   resp[0].toString()
+  document.getElementById('compressration').innerHTML =   resp[1].toString()
+
 }
 
+function runCompress(){
+
+  M = createMatrix(nodes, links)
+  resp = runlength(M)
+  console.log('hi')
+  document.getElementById('compressres').innerHTML =   resp[0].toString()
+  document.getElementById('compressration').innerHTML =   resp[1].toString()
+
+}
+
+function b2dCompress(){
+
+  M = createMatrix(nodes, links)
+  resp = binary2decimal(M)
+  console.log('hi')
+  document.getElementById('compressres').innerHTML =   resp[0].toString()
+  document.getElementById('compressration').innerHTML =   resp[1].toString()
+
+}
+
+
+function runlength(M) {
+  var EM = [];
+  var rows = M.length;
+  var cols = M[0].length;
+  var EM_size = 0, M_size = cols * rows;
+  for (var line = 0; line < rows; line++) {
+    var EMrow = []; var k;
+    for (var col = 0; col < cols; col = k) {
+      var count = 1; var val = M[line][col];
+      for (k = col + 1; k < cols && M[line][k] == val; k++ , count++) { }
+      EMrow.push(val); EMrow.push(count);
+      EM_size += 2;
+    }
+    EM.push(EMrow);
+  }
+  return [EM, (1- (EM_size/M_size)).toFixed(2)];
+}
+
+
+function binary2decimal(m){
+	var i,j,sum=0,count=0,b=new Array(),li=new Array();
+    var size = 0;
+    x = m.length;
+    y = m[0].length;
+    console.log(y);
+	for(i=0 ; i<x;i++){
+    	var count= 0,sum =0;
+        
+	  for( j=0 ; j<=y; j++){
+      		if(count>63 || j==y){
+				li.push(sum);
+  				size ++;
+                //document.write(sum+ " "+j+"<br>");
+					count=0,sum=0;
+			}
+			if(count<=63){
+				sum = sum + (Math.pow(2,count) * m[i][j]);
+                
+                if(count==y-1)
+                {
+                    li.push(sum);
+                    size ++;
+                    break;
+                }
+                //sum = (sum<< 1)| (m[i][j]);
+				count++;
+			}
+
+		}
+		b.push(li),sum=0,count=0,li=[];
+        //size++;
+	}
+    //document.write(size+" <br>");
+    size = b[0].length*b.length;
+    size = (x*y)/size;
+   // document.write(size);
+    return [b, (1-(1/size)).toFixed(2)];
+}

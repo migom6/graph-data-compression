@@ -92,7 +92,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   margin-left: 50px;
 }
 
-#btn {
+/* #btn {
   line-height: 12px;
   width: 18px;
   font-size: 8pt;
@@ -104,4 +104,35 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   bottom:0;
   right:0;
   border: #000 solid;
+} */
+
+.btn1 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.btn2 {
+  background-color: burlywood; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.btn3 {
+  background-color: royalblue; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
