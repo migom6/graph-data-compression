@@ -54,7 +54,6 @@ function binary2decimal(m){
     var size = 0;
     x = m.length;
     y = m[0].length;
-    console.log(y);
 	for(i=0 ; i<x;i++){
     	var count= 0,sum =0;
         
@@ -106,13 +105,89 @@ function inc_list(M) {
   return ([res, vertices/2]);
 }
 
+function path(G,x , y){
+  var visited = []
+  for(i=0;i<G.length;i++)
+    visited.push(0);
+  
+  sol = []
+  c = 0
+  arr = []
+  function DFS(i , y) {
+    arr.push(i);
+    visited[i] = 1;
+    if(i == y) {
+      let b = Array.from(arr);
+      sol.push(b)
+      visited[i] = 0;
+      arr.pop()
+      return;
+    }
+    var j;
+    for(j = 0; j < G.length; j++){
+      if(visited[j] != 1 && G[i][j]==1)
+            DFS(j, y);
+    }   
+    visited[i]=0;
+    arr.pop()
+    return 
+    //c = c + 1
+    // if(c == G.length - 1){
+    //   return
+    // }
+  }
+
+  DFS(x , y)
+  return sol
+}
 
 
 
 
-console.log(inc_adj(M));
-console.log(runlength(M));
-console.log(inc_list(M));
-console.log(binary2decimal(M));
+m = [[0,1,1,1],
+    [1,0,1,1],
+    [1,1,0,0],
+    [1,1,0,0] ]
+
+
+console.log(path(m , 0 , 3))
+
+
+// function pathMatrix(M, d) {
+//   //0 matrix
+//   var temp = []
+//   for(i = 0; i < d.length; i++){
+//     let c = []
+//     for(j = 0; j < M[0].length; j++) {
+//       c.push(0)
+//     }
+//     temp.push(c)
+//   }
+//   for(i = 0; i < d.length; i++){
+//     for(j = 0; j < d[i].length-1; j++){
+//       x = d[i][j]
+//       y = d[i][j+1]
+//       for(m = 0; m < M[0].length; m++){
+//         if(M[x][m] == 1 && M[x][m] == M[y][m]){
+//           temp[i][m] = 1
+//         }
+//       }
+//     }
+//   }
+
+//   return temp
+// }
+
+// m = [[1,0,0,1],
+//     [1,1,0,0],
+//     [0,1,1,0],
+//     [0,0,1,1]]
+
+// d = [[0,1,2],[0,3,2]]
+// console.log(pathMatrix(m,d))
+// console.log(inc_adj(M));
+// console.log(runlength(M));
+// console.log(inc_list(M));
+// console.log(binary2decimal(M));
 
 

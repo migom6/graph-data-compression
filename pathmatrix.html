@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Path Matrix</title>
+    <link rel="stylesheet" href="app.1.css">
+  </head>
+
+  <body>
+    <center><h1 style="color:rgb(59, 59, 59);">Path Matrix</h1></center>
+    <div id="row1">
+      <div id="graph-viz"></div>
+      <div id ="matrix">
+          <h3 style="color:rgb(59, 59, 59);">Incidence Matrix</h3><h5>(edges vs vertices)</h5>
+          <div id="myTable"></div>
+      </div>
+    </div>
+    <div id='row2'>
+      <div id='col1'>
+        <form>
+            <h5>Source</h5><input  type="number" name='src' id='inp1'></input> <h5>Destination</h5><input  type="number" id='inp2' name='des'></input>
+        </form>
+        <button class="btn1" onclick="pathMatrixTable()">Create Path Matrix</button>
+        <button class="btn3" onclick="pathdirection()">Show Directions</button>
+      </div>
+      <div>
+        <h3 style="color:rgb(59, 59, 59);" >Incidence Matrix</h3> <h5>(paths vs edges)</h5>
+        <div id='pathtable'></div>
+        <div id='pathvector'></div>
+      </div>
+   
+    </div>
+  </body>
+  <script src="dist/sweetalert.min.js"></script>
+  <script src="dist/d3.js"></script>
+  <script src="app.1.js"></script>
+</html>
