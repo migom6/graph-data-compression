@@ -7,3 +7,5 @@
 3. [ ] decimal-to-binary
 
 
+## Assignment 2
+### https://migom6.github.io/graph-data-compression/pathmatrix.html
